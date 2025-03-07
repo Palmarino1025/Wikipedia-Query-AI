@@ -1,8 +1,29 @@
 
+# **Prompts**
+## **Selecting and Loading Document**
+Write Python code to read this website https://en.wikipedia.org/wiki/Artificial_intelligence . If the document is a web page, use BeautifulSoup to extract the relevant text. I need to save this in a text file called Selected_Document.txt
+
+## **Installing Required Libraries**
+I need the linux install command for all the needed requirements and i need them outlined in a requirements.txt
+
+## **Embeddings**
+Write Python code that reads the content of a file called "Selected_Document.txt" and splits it into chunks separated by double newline characters ("\n\n"). Make it use SentenceTransformers library and the model "all-MiniLM-L6-v2" to generate embeddings for a list of text chunks. Store the embeddings in a Python dictionary along with their associated text.
+
+## **Querying the System**
+Write Python code that takes a query as input, generates its embedding using SentenceTransformers, and finds the top 3 most similar text chunks from a dictionary of embeddings using cosine similarity from scikit-learn.
+Write Python code that uses the HuggingFace Transformers library and the "google/flan-t5-small" model to generate a text response based on retrieved text chunks and a query. Combine the chunks into a single prompt before generating the response. The program should take user queries as input rather than hardcoding them.
+
+I used the two prompts one after the other
+
+## **Deepening my Understanding**
+What are five important questions I should ask to understand how this program works? Please include questions about concepts such as cosine similarity, sentence-transformers, and the role of embeddings.
+
+---
+
 # **Reflection Report**
 
 ## **Name and Explanation of the Document**
-The document used is the Wikipedia article on **Retrieval-Augmented Generation (RAG)**. This article explains the methodology, applications, and advantages of using RAG in AI systems. It provides an overview of how RAG enhances generative AI by retrieving relevant context from external sources.
+The document used is the Wikipedia article on **Artificial Intelligence**. This article overviewed the different parts of understand artifical intelligence
 
 ---
 ## **How the Program Works**
@@ -40,60 +61,65 @@ I asked the AI to give me a simple explanation of how the program works. It resp
 ## **Questions About the Program**
 Below are five questions I asked an AI tool to deepen my understanding of the program, along with their answers:
 
-1. **What is cosine similarity, and why is it used?**  
-   - **Answer:** Cosine similarity measures the similarity between two vectors by computing the cosine of the angle between them. It is used in this program to compare the query vector to document embeddings and retrieve the most relevant chunks.
+1. **What are embeddings, and why are they used in this program?**  
+   - **Answer:** In this program, embeddings are essential for transforming text into a format that can be efficiently processed by machine learning algorithms. They enable the program to perform semantic comparisons between the query and document chunks and to generate a meaningful response by using the relevant information.
 
-2. **What does "sentence-transformers" do?**  
-   - **Answer:** Sentence-transformers embed text into high-dimensional vectors, allowing for efficient similarity-based retrieval of text data.
+2. **How does the SentenceTransformer model generate embeddings for text, and what is its role in this program?**  
+   - **Answer:** The SentenceTransformer model is responsible for converting text into embeddings (dense vector representations), which capture the meaning of the text. These embeddings are used to measure the similarity between the query and the document chunks, allowing the program to retrieve the most relevant information for generating a meaningful response.
 
-3. **How does RAG ensure responses are grounded in context?**  
-   - **Answer:** RAG retrieves relevant context from external documents or databases and combines it with text generation to produce grounded, accurate answers.
+3. **What is cosine similarity, and how is it used to retrieve the most relevant text chunks for a given query?**  
+   - **Answer:** Cosine similarity is a metric that measures the similarity between two vectors based on their direction. It is used in this program to compare the embeddings of a user query and document chunks, helping to identify which chunks of text are most relevant to the query. The chunks with the highest cosine similarity are retrieved, and their content is used to generate a response to the user's question.
 
-4. **What are embeddings in machine learning?**  
-   - **Answer:** Embeddings are vector representations of data (e.g., text or images) that capture their semantic meaning in a way that is useful for machine learning models.
+4. **What are the key differences between classification and regression in machine learning, and why is this program using a text generation model instead of one for classification or regression?**  
+   - **Answer:** Classification is used for predicting categorical labels, and regression is used for predicting continuous numerical values. These methods are suitable for tasks where the output is discrete or numerical.
 
-5. **How does the HuggingFace model generate responses?**  
-   - **Answer:** The HuggingFace model uses a pre-trained text generation architecture (e.g., T5 or GPT) to generate responses. It combines a user query and the retrieved context to craft relevant and coherent outputs.
+Text generation (like using a model such as T5) is used in this program because the goal is to generate human-readable, contextually relevant responses to user queries. Text generation models are capable of producing diverse, coherent, and semantically rich outputs, making them ideal for tasks such as question answering, summarization, or content creation.
+
+5. **How does the program handle different queries and select the most relevant information to generate a response using the HuggingFace model?**  
+   - **Answer:** 
+   -Query is embedded into a vector.
+  -Cosine similarity is calculated between the query and document chunks to identify relevant information.
+  -The most similar chunks are retrieved.
+  -The HuggingFace T5 model generates a response based on these chunks.
+  -A final textual response is provided to the user, answering their query.
+
+This process enables the program to answer various types of queries by retrieving and generating information from a source document in a way that is both contextually relevant and linguistically coherent.
 
 ---
 
 ## **Performance Analysis**
 
 ### **Retrieval Quality**  
-The system effectively retrieved the most relevant chunks of text for the queries. The cosine similarity method worked efficiently in finding the most contextually appropriate pieces of text.
+The system effectively retrieved a small part and I think once it finds one response it sends that instead of skimming all the data
 
 ### **Response Quality**  
-The generated answers were accurate and contextually grounded. They demonstrated a clear understanding of the information from the retrieved content.
+The response is small and not really giving my information. 
 
 ### **Possible Improvements**  
-1. **Fine-tuning the Model:** Using a domain-specific dataset to fine-tune the HuggingFace model could improve the quality of the generated responses.  
-2. **Expanding Retrieval Mechanism:** Incorporating more advanced vector storage solutions, such as Pinecone or FAISS, might improve the retrieval speed and accuracy for larger datasets.  
-3. **User Interface:** Adding a simple graphical user interface would make the system more accessible to non-technical users.
+1. **Researching more into how the retrieval is being done:** Making sure that the whole document is being looked at and not just sending the first answer it finds. 
+
+2. **Building on multiple queries and exit conditions:** Allowing a small conversation to happen to help understand the responses more clearly if more information is needed.
+
+3. **Adding multiple ways of search past the document :** Adding an ability to reach out past the document to find more information if a clarification is needed. 
 
 ---
 
 ## **Example Queries and Outputs**
 
 ### **Query 1:**  
-**_What is Retrieval-Augmented Generation?_**  
-- **Retrieved Content:**  
-  RAG is a machine learning technique that enhances text generation by retrieving relevant context from external documents or databases.  
+**"What is the history of AI development?"**    
 - **Generated Response:**  
-  Retrieval-Augmented Generation is a technique in AI where text generation is improved by retrieving external context relevant to the query.
+  the market for AI had reached over a billion dollars
 
 ### **Query 2:**  
-**_How does RAG differ from standard models?_**  
-- **Retrieved Content:**  
-  Standard models rely solely on pre-trained knowledge, while RAG incorporates retrieval to ground responses in external data.  
+**"What are neural networks?"**  
 - **Generated Response:**  
-  RAG combines retrieval and generation to ground outputs in specific documents, unlike standard generative models that rely solely on pre-trained knowledge.
+  based on a collection of nodes also known as artificial neurons
 
 ### **Query 3:**  
-**_What are the advantages of RAG?_**  
-- **Retrieved Content:**  
-  RAG improves the accuracy of generative models by retrieving precise context, making responses more reliable and less prone to hallucination.  
+**"Can you explain reinforcement learning?"**  
 - **Generated Response:**  
-  Retrieval-Augmented Generation enhances accuracy and relevance by grounding responses in specific retrieved data, reducing hallucinations.
+  inverse reinforcement learning
 
 ---
 
